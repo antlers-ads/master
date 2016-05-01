@@ -1,2 +1,3 @@
-# master
-Application used to manage advertisements
+# Antlers Ads master tier
+
+Application used to manage advertisements.
