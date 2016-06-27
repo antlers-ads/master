@@ -13,3 +13,5 @@
 /composer.phar
 web/app_dev.php
 coverage/
+app/SymfonyRequirements.php
+app/check.php
