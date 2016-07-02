@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Form used to manage advertisement entity.
@@ -19,7 +20,17 @@ class AdvertisementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', ['label' => 'Name']);
+        $builder
+            ->add('name', 'text', ['label' => 'Name'])
+            ->add('client', 'entity', [
+                'class' => 'AppBundle:Client',
+                'empty_value' => '',
+                'label' => 'Client',
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('Client')
+                        ->orderBy('Client.name', 'ASC');
+                },
+            ]);
     }
 
     /**

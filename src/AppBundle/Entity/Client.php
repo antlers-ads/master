@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Advertisement;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -33,6 +36,29 @@ class Client
      */
     private $name;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Advertisement", mappedBy="client")
+     */
+    private $advertisements;
+
+    /**
+     * Initializes entity.
+     */
+    public function __construct()
+    {
+        $this->advertisements = new ArrayCollection();
+    }
+
+    /**
+     * Returns string representation of an entity.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Gets id.
@@ -65,5 +91,37 @@ class Client
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Adds advertisement.
+     *
+     * @param Advertisement $advertisement
+     * @return Client
+     */
+    public function addAdvertisement(Advertisement $advertisement)
+    {
+        $this->advertisements[] = $advertisement;
+        return $this;
+    }
+
+    /**
+     * Removes advertisement.
+     *
+     * @param Advertisement $advertisement
+     */
+    public function removeAdvertisement(Advertisement $advertisement)
+    {
+        $this->advertisements->removeElement($advertisement);
+    }
+
+    /**
+     * Gets advertisements.
+     *
+     * @return Collection
+     */
+    public function getAdvertisements()
+    {
+        return $this->advertisements;
     }
 }

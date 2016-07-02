@@ -6,7 +6,16 @@
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success" role="alert">
             {{ flashMessage }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>

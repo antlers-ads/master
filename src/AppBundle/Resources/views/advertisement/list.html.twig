@@ -6,7 +6,16 @@
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success" role="alert">
             {{ flashMessage }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Zamknij">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -18,6 +27,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Client</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,6 +36,7 @@
                     <tr>
                         <td>{{ entity.id }}</td>
                         <td>{{ entity.name }}</td>
+                        <td>{{ entity.client }}</td>
                         <td>
                             <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id}) }}" class="link btn btn-xs btn-default">Edit</button>
                             <button type="button" data-link="{{ path('advertisement_delete', {id: entity.id}) }}" class="link btn btn-xs btn-default">Delete</button>

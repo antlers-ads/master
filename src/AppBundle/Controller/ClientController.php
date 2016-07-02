@@ -133,10 +133,15 @@ class ClientController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($entity);
-                $entityManager->flush();
-                $this->addFlash('success', 'Successfully deleted the client.');
+                if (!$entity->getAdvertisements()->isEmpty()) {
+                    $this->addFlash('error', 'There are advertisements associated with this client.');
+                } else {
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->remove($entity);
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Successfully deleted the client.');
+                }
+
                 return $this->redirect($this->generateUrl('client_list'));
             }
         }

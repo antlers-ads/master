@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Client;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -33,6 +34,15 @@ class Advertisement
      */
     private $name;
 
+    /**
+     * @var Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="advertisements")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
+     *
+     * @Assert\NotBlank()
+     */
+    private $client;
 
     /**
      * Gets id.
@@ -65,5 +75,27 @@ class Advertisement
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Sets client.
+     *
+     * @param Client $client
+     * @return Advertisement
+     */
+    public function setClient(Client $client = null)
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+    /**
+     * Gets client.
+     *
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }
