@@ -11,7 +11,12 @@
 /vendor/
 /bin/
 /composer.phar
+/node_modules
 web/app_dev.php
 coverage/
 app/SymfonyRequirements.php
 app/check.php
+web/assets/app.all.css
+web/assets/app.all.js
+web/assets/app.min.css
+web/assets/app.min.js

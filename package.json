@@ -1,0 +1,14 @@
+{
+  "name": "antlers-ads-master",
+  "version": "1.0.0",
+  "author": "Daniel Iwaniec",
+  "license": "MIT",
+  "repository": "https://github.com/antlers-ads/master",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}
