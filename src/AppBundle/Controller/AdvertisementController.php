@@ -50,6 +50,17 @@ class AdvertisementController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
+                $file = $entity->getImage();
+
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('images_directory'), $fileName);
+                list($width, $height) = getimagesize($this->getParameter('images_directory') . '/' . $fileName);
+
+                $entity->setWidth($width);
+                $entity->setHeight($height);
+                $entity->setImage($fileName);
+
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($entity);
                 $entityManager->flush();

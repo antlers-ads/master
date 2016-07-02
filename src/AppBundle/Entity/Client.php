@@ -32,7 +32,7 @@ class Client
      * @ORM\Column(name="name", type="text", unique=true)
      *
      * @Assert\NotBlank()
-     * @Assert\Length(min=3,max=50)
+     * @Assert\Length(min=3,max=100)
      */
     private $name;
 
