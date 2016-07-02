@@ -1,0 +1,46 @@
+{% extends 'AppBundle::boilerplate.html.twig' %}
+
+{% block layout %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('assets/img/menu_logo.png') }}" alt="Antlers Ads">Antlers Ads</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('homepage') }}">Homepage</a></li>
+                    <li><a href="{{ path('info') }}">Info</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <h3>Clients</h3>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#">List of clients</a></li>
+                    <li><a href="#">Add client</a></li>
+                </ul>
+                <h3>Advertisements</h3>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#">List of advertisements</a></li>
+                    <li><a href="#">Add advertisement</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                {% block body %}{% endblock %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
