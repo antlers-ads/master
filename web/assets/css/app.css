@@ -142,3 +142,8 @@ body {
 .dashboard_box .nav li a:hover {
     background-color: #f5f5f5;
 }
+
+.add-button {
+    margin-left: 10px;
+    margin-top: -5px;
+}
