@@ -8,4 +8,8 @@
         <default key="_controller">AppBundle:Index:index</default>
     </route>
 
+    <route id="info" path="/info">
+        <default key="_controller">AppBundle:Index:info</default>
+    </route>
+
 </routes>

@@ -10,10 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class IndexController extends Controller
 {
     /**
-     * Handles main page.
+     * Handles homepage page.
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:index:index.html.twig');
+        return $this->render('AppBundle:index:homepage.html.twig');
+    }
+
+    /**
+     * Handles info page.
+     */
+    public function infoAction()
+    {
+        return $this->render('AppBundle:index:info.html.twig');
     }
 }
