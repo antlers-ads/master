@@ -64,4 +64,86 @@ class ClientController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * Edits an existing client entity.
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return RedirectResponse|Response
+     */
+    public function editAction(Request $request, $id)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Client');
+        $entity = $repository->getById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(new ClientType(), $entity, [
+            'action' => $this->generateUrl('client_edit', ['id' => $entity->getId()]),
+            'method' => 'POST',
+        ])->add('submit', 'submit', [
+            'attr' => ['class' => 'btn btn-default pull-left']
+        ]);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Successfully changed the client.');
+                return $this->redirect($this->generateUrl('client_list'));
+            }
+        }
+
+        return $this->render('AppBundle:Client:edit.html.twig', [
+            'entity' => $entity,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Deletes a client entity.
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Client');
+        $entity = $repository->getById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('client_delete', ['id' => $id]))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', [
+                'label' => 'Delete',
+                'attr' => ['class' => 'btn btn-danger pull-right']
+            ])->getForm();
+
+        if ($request->isMethod('DELETE')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($entity);
+                $entityManager->flush();
+                $this->addFlash('success', 'Successfully deleted the client.');
+                return $this->redirect($this->generateUrl('client_list'));
+            }
+        }
+
+        return $this->render('AppBundle:Client:delete.html.twig', [
+            'entity' => $entity,
+            'form' => $form->createView()
+        ]);
+    }
 }

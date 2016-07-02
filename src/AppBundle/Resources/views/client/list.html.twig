@@ -27,8 +27,8 @@
                         <td>{{ entity.id }}</td>
                         <td>{{ entity.name }}</td>
                         <td>
-                            <button type="button" data-link="#" class="link btn btn-xs btn-default">Edit</button>
-                            <button type="button" data-link="#" class="link btn btn-xs btn-default">Delete</button>
+                            <button type="button" data-link="{{ path('client_edit', {id: entity.id}) }}" class="link btn btn-xs btn-default">Edit</button>
+                            <button type="button" data-link="{{ path('client_delete', {id: entity.id}) }}" class="link btn btn-xs btn-default">Delete</button>
                         </td>
                     </tr>
                 {% endfor %}

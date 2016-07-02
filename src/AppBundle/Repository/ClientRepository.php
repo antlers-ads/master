@@ -4,6 +4,8 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Client;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 
 /**
@@ -40,5 +42,36 @@ class ClientRepository extends EntityRepository
         $query = $this->getAllQuery($limit);
 
         return $query->getResult();
+    }
+
+    /**
+     * Builds query used to retrieve client by id.
+     *
+     * @param integer $id
+     * @return Query
+     */
+    public function getByIdQuery($id)
+    {
+        $queryBuilder = $this->createQueryBuilder('Client');
+        $queryBuilder->andWhere('Client.id = :id')->setParameter('id', $id);
+        $queryBuilder->setMaxResults(1);
+        return $queryBuilder->getQuery();
+    }
+
+    /**
+     * Retrieves client by id.
+     *
+     * @param integer $id
+     * @throws NonUniqueResultException
+     * @return Client|null
+     */
+    public function getById($id)
+    {
+        $query = $this->getByIdQuery($id);
+        try {
+            return $query->getSingleResult();
+        } catch (NoResultException $exception) {
+            return null;
+        }
     }
 }
