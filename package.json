@@ -5,11 +5,12 @@
   "license": "MIT",
   "repository": "https://github.com/antlers-ads/master",
   "dependencies": {
+    "jquery": "2.*",
     "bootstrap": "^3.3.6",
     "grunt": "^1.0.1",
-    "jquery": "2.*",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^1.0.1",
-    "grunt-contrib-uglify": "^1.0.1"
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-regex-replace": "^0.3.0"
   }
 }

@@ -12,4 +12,20 @@
         <default key="_controller">AppBundle:Index:info</default>
     </route>
 
+    <route id="client_list" path="/client">
+        <default key="_controller">AppBundle:Client:list</default>
+    </route>
+
+    <route id="client_add" path="/client-add">
+        <default key="_controller">AppBundle:Client:add</default>
+    </route>
+
+    <route id="client_edit" path="/client-edit/{id}">
+        <default key="_controller">AppBundle:Client:edit</default>
+    </route>
+
+    <route id="client_delete" path="/client-delete/{id}">
+        <default key="_controller">AppBundle:Client:delete</default>
+    </route>
+
 </routes>

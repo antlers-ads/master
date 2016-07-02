@@ -18,7 +18,7 @@ module.exports = function (grunt) {
                 src: [
                     'node_modules/jquery/dist/jquery.min.js',
                     'node_modules/bootstrap/dist/js/bootstrap.min.js',
-                    'web/assets/js/app.all.js'
+                    'web/assets/js/app.js'
                 ],
                 dest: 'web/assets/app.all.js'
             }
@@ -35,12 +35,26 @@ module.exports = function (grunt) {
                 src: 'web/assets/app.all.js',
                 dest: 'web/assets/app.min.js'
             }
+        },
+        "regex-replace": {
+            glyphicons: {
+                src: ['web/assets/app.all.css', 'web/assets/app.min.css'],
+                actions: [
+                    {
+                        name: 'glyphicons',
+                        search: '\.\.\/fonts\/',
+                        replace: 'fonts/',
+                        flags: 'gm'
+                    }
+                ]
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-regex-replace');
 
-    grunt.registerTask('default', ['concat', 'cssmin', 'uglify']);
+    grunt.registerTask('default', ['concat', 'cssmin', 'uglify', 'regex-replace']);
 };

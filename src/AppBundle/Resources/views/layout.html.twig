@@ -27,8 +27,12 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <h3>Clients</h3>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#">List of clients</a></li>
-                    <li><a href="#">Add client</a></li>
+                    <li{% if app.request.get('_route') == 'client_list' %} class="active"{% endif %}>
+                        <a href="{{ path('client_list') }}">List of clients</a>
+                    </li>
+                    <li {% if app.request.get('_route') == 'client_add' %} class="active"{% endif %}>
+                        <a href="{{ path('client_add') }}">Add client</a>
+                    </li>
                 </ul>
                 <h3>Advertisements</h3>
                 <ul class="nav nav-sidebar">
