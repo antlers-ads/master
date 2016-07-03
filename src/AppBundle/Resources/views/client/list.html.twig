@@ -1,0 +1,51 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Clients</h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in pagination %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{{ entity.name }}</td>
+                        <td>
+                            <button type="button" data-link="{{ path('client_edit', {id: entity.id}) }}" class="link btn btn-xs btn-default">Edit</button>
+                            <button type="button" data-link="{{ path('client_delete', {id: entity.id}) }}" class="link btn btn-xs btn-default">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

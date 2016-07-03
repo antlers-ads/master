@@ -1,0 +1,14 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Delete client</h1>
+
+    <div class="alert alert-link" role="alert">
+        Are you sure you want to delete <em>{{ entity.name }}</em>?
+    </div>
+
+    <a class="btn btn-default pull-left" href="{{ path('client_list') }}" role="button">Cancel</a>
+
+    {{ form(form) }}
+{% endblock %}

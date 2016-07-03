@@ -1,0 +1,30 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Advertisement's invocation code</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Client</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.client }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="well">
+        <p><strong>Views</strong> - {{ entity.views }}</p>
+
+        <p><strong>Clicks</strong> - {{ entity.clicks }} </p>
+    </div>
+{% endblock %}

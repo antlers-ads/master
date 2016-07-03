@@ -1,0 +1,26 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Homepage</h1>
+    <p>Antlers Ads - Yet another open source adserver.</p>
+
+    <div class="row dashboard_boxes">
+        <div class="col-xs-6 col-sm-3 dashboard_box">
+            <h2 class="sub-header">Clients</h2>
+
+            <ul class="nav">
+                <li><a href="{{ path('client_list') }}">List of clients</a></li>
+                <li><a href="{{ path('client_add') }}">Add client</a></li>
+            </ul>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 dashboard_box">
+            <h2 class="sub-header">Advertisements</h2>
+
+            <ul class="nav">
+                <li><a href="{{ path('advertisement_list') }}">List of advertisements</a></li>
+                <li><a href="{{ path('advertisement_add') }}">Add advertisement</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

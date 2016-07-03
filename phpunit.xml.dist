@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="app/test.bootstrap.php">
+
+    <testsuites>
+        <testsuite name="Antlers Ads master test suite">
+            <directory>src/*/*Bundle/Tests</directory>
+            <directory>src/*/Bundle/*Bundle/Tests</directory>
+            <directory>src/*Bundle/Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <server name="KERNEL_DIR" value="app"/>
+    </php>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/*Bundle/Resources</directory>
+                <directory>src/*Bundle/Tests</directory>
+                <directory>src/*Bundle/DataFixtures</directory>
+                <directory>src/*/*Bundle/Resources</directory>
+                <directory>src/*/*Bundle/Tests</directory>
+                <directory>src/*/*Bundle/DataFixtures</directory>
+                <directory>src/*/Bundle/*Bundle/Resources</directory>
+                <directory>src/*/Bundle/*Bundle/Tests</directory>
+                <directory>src/*/Bundle/*Bundle/DataFixtures</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
