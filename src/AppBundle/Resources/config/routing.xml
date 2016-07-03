@@ -44,4 +44,8 @@
         <default key="_controller">AppBundle:Advertisement:delete</default>
     </route>
 
+    <route id="advertisement_invocation_code" path="/advertisement-invocation-code/{id}">
+        <default key="_controller">AppBundle:Advertisement:invocationCode</default>
+    </route>
+
 </routes>

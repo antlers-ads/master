@@ -154,4 +154,25 @@ class AdvertisementController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * Displays invocation code for advertisement.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function invocationCodeAction(Request $request, $id)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Advertisement');
+        $entity = $repository->getById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('AppBundle:advertisement:invocationCode.html.twig', [
+            'entity' => $entity,
+            'workerAddress' => $this->getParameter('worker_address')
+        ]);
+    }
 }
