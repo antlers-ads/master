@@ -29,6 +29,7 @@
                     <th>Name</th>
                     <th>Client</th>
                     <th>Invocation code</th>
+                    <th>Data</th>
                     <th>Manipulate</th>
                 </tr>
             </thead>
@@ -41,6 +42,11 @@
                         <td>
                             <button type="button" data-link="{{ path('advertisement_invocation_code', {id: entity.id}) }}"
                                     class="link btn btn-xs btn-default">Show invocation code
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" data-link="{{ path('advertisement_statistics', {id: entity.id}) }}"
+                                    class="link btn btn-xs btn-default">Statistics
                             </button>
                         </td>
                         <td>
