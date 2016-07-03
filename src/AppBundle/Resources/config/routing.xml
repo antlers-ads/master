@@ -28,4 +28,24 @@
         <default key="_controller">AppBundle:Client:delete</default>
     </route>
 
+    <route id="advertisement_list" path="/advertisement">
+        <default key="_controller">AppBundle:Advertisement:list</default>
+    </route>
+
+    <route id="advertisement_add" path="/advertisement-add">
+        <default key="_controller">AppBundle:Advertisement:add</default>
+    </route>
+
+    <route id="advertisement_edit" path="/advertisement-edit/{mode}/{id}">
+        <default key="_controller">AppBundle:Advertisement:edit</default>
+    </route>
+
+    <route id="advertisement_delete" path="/advertisement-delete/{id}">
+        <default key="_controller">AppBundle:Advertisement:delete</default>
+    </route>
+
+    <route id="advertisement_invocation_code" path="/advertisement-invocation-code/{id}">
+        <default key="_controller">AppBundle:Advertisement:invocationCode</default>
+    </route>
+
 </routes>

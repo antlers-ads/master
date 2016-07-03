@@ -36,8 +36,12 @@
                 </ul>
                 <h3>Advertisements</h3>
                 <ul class="nav nav-sidebar">
-                    <li><a href="#">List of advertisements</a></li>
-                    <li><a href="#">Add advertisement</a></li>
+                    <li{% if app.request.get('_route') == 'advertisement_list' %} class="active"{% endif %}>
+                        <a href={{ path('advertisement_list') }}>List of advertisements</a>
+                    </li>
+                    <li{% if app.request.get('_route') == 'advertisement_add' %} class="active"{% endif %}>
+                        <a href="{{ path('advertisement_add') }}">Add advertisement</a>
+                    </li>
                 </ul>
             </div>
 

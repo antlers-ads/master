@@ -5,6 +5,7 @@ imports:
 
 parameters:
     locale: en
+    images_directory: '%kernel.root_dir%/../web/images'
 
 framework:
     secret:          "%secret%"

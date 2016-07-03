@@ -1,7 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
-    <h1 class="page-header">Clients</h1>
+    <h1 class="page-header">Advertisements</h1>
 
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success" role="alert">
@@ -27,7 +27,9 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th>Client</th>
+                    <th>Invocation code</th>
+                    <th>Manipulate</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,9 +37,22 @@
                     <tr>
                         <td>{{ entity.id }}</td>
                         <td>{{ entity.name }}</td>
+                        <td>{{ entity.client }}</td>
                         <td>
-                            <button type="button" data-link="{{ path('client_edit', {id: entity.id}) }}" class="link btn btn-xs btn-default">Edit</button>
-                            <button type="button" data-link="{{ path('client_delete', {id: entity.id}) }}" class="link btn btn-xs btn-default">Delete</button>
+                            <button type="button" data-link="{{ path('advertisement_invocation_code', {id: entity.id}) }}"
+                                    class="link btn btn-xs btn-default">Show invocation code
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id, mode: editModeName}) }}"
+                                    class="link btn btn-xs btn-default">Edit
+                            </button>
+                            <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id, mode: replaceImageModeName}) }}"
+                                    class="link btn btn-xs btn-default">Replace image
+                            </button>
+                            <button type="button" data-link="{{ path('advertisement_delete', {id: entity.id}) }}"
+                                    class="link btn btn-xs btn-default">Delete
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}
