@@ -1,3 +1,4 @@
-parameters:
-
 services:
+    app.advertisement:
+        class:     AppBundle\Service\AdvertisementService
+        arguments: ["@doctrine.orm.entity_manager", "%images_directory%"]

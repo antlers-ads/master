@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Default controller for actions related to advertisements.
@@ -50,20 +51,8 @@ class AdvertisementController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $entity->getImage();
-
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move($this->getParameter('images_directory'), $fileName);
-                list($width, $height) = getimagesize($this->getParameter('images_directory') . '/' . $fileName);
-
-                $entity->setWidth($width);
-                $entity->setHeight($height);
-                $entity->setImage($fileName);
-
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($entity);
-                $entityManager->flush();
+                $advertisementService = $this->get('app.advertisement');
+                $advertisementService->saveAdvertisement($entity);
                 $this->addFlash('success', 'Successfully added new advertisement.');
 
                 return $this->redirect($this->generateUrl('advertisement_list'));
@@ -92,6 +81,8 @@ class AdvertisementController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $entity->setImage(new File($this->getParameter('images_directory') . '/' . $entity->getImage()));
+
         $form = $this->createForm(new AdvertisementType(), $entity, [
             'action' => $this->generateUrl('advertisement_edit', ['id' => $entity->getId()]),
             'method' => 'POST',
@@ -103,8 +94,8 @@ class AdvertisementController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
+                $advertisementService = $this->get('app.advertisement');
+                $advertisementService->saveAdvertisement($entity);
                 $this->addFlash('success', 'Successfully changed the advertisement.');
                 return $this->redirect($this->generateUrl('advertisement_list'));
             }
@@ -144,9 +135,8 @@ class AdvertisementController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($entity);
-                $entityManager->flush();
+                $advertisementService = $this->get('app.advertisement');
+                $advertisementService->deleteAdvertisement($entity);
                 $this->addFlash('success', 'Successfully deleted the advertisement.');
                 return $this->redirect($this->generateUrl('advertisement_list'));
             }
