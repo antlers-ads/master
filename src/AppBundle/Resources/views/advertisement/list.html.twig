@@ -38,8 +38,15 @@
                         <td>{{ entity.name }}</td>
                         <td>{{ entity.client }}</td>
                         <td>
-                            <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id}) }}" class="link btn btn-xs btn-default">Edit</button>
-                            <button type="button" data-link="{{ path('advertisement_delete', {id: entity.id}) }}" class="link btn btn-xs btn-default">Delete</button>
+                            <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id, mode: editModeName}) }}"
+                                    class="link btn btn-xs btn-default">Edit
+                            </button>
+                            <button type="button" data-link="{{ path('advertisement_edit', {id: entity.id, mode: replaceImageModeName}) }}"
+                                    class="link btn btn-xs btn-default">Replace image
+                            </button>
+                            <button type="button" data-link="{{ path('advertisement_delete', {id: entity.id}) }}"
+                                    class="link btn btn-xs btn-default">Delete
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}

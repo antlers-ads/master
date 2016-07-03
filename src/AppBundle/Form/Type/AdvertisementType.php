@@ -14,6 +14,28 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
  */
 class AdvertisementType extends AbstractType
 {
+    /** @var string */
+    const ADD_MODE = 'add';
+
+    /** @var string */
+    const EDIT_MODE = 'data';
+
+    /** @var string */
+    const IMAGE_MODE = 'image';
+
+    /** @var string */
+    protected $mode;
+
+    /**
+     * Initializes form.
+     *
+     * @param string $mode
+     */
+    public function __construct($mode = self::ADD_MODE)
+    {
+        $this->mode = $mode;
+    }
+
     /**
      * Builds form.
      *
@@ -22,20 +44,25 @@ class AdvertisementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name', 'text')
-            ->add('client', 'entity', [
-                'class' => 'AppBundle:Client',
-                'empty_value' => '',
-                'query_builder' => function (EntityRepository $repository) {
-                    return $repository->createQueryBuilder('Client')
-                        ->orderBy('Client.name', 'ASC');
-                },
-            ])
-            ->add('start_date', DateTimeType::class)
-            ->add('end_date', DateTimeType::class)
-            ->add('image', FileType::class)
-            ->add('url', 'url');
+        if ($this->mode == self::ADD_MODE || $this->mode == self::EDIT_MODE) {
+            $builder
+                ->add('name', 'text')
+                ->add('client', 'entity', [
+                    'class' => 'AppBundle:Client',
+                    'empty_value' => '',
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('Client')
+                            ->orderBy('Client.name', 'ASC');
+                    },
+                ])
+                ->add('start_date', DateTimeType::class)
+                ->add('end_date', DateTimeType::class)
+                ->add('url', 'url');
+        }
+
+        if ($this->mode == self::ADD_MODE || $this->mode == self::IMAGE_MODE) {
+            $builder->add('image', FileType::class);
+        }
     }
 
     /**

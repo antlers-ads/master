@@ -36,7 +36,7 @@
         <default key="_controller">AppBundle:Advertisement:add</default>
     </route>
 
-    <route id="advertisement_edit" path="/advertisement-edit/{id}">
+    <route id="advertisement_edit" path="/advertisement-edit/{mode}/{id}">
         <default key="_controller">AppBundle:Advertisement:edit</default>
     </route>
 

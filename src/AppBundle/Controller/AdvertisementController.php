@@ -27,7 +27,11 @@ class AdvertisementController extends Controller
         $repository = $this->getDoctrine()->getRepository('AppBundle:Advertisement');
         $pagination = $paginator->paginate($repository->getAllQuery(), $request->get('page', 1));
 
-        return $this->render('AppBundle:advertisement:list.html.twig', ['pagination' => $pagination]);
+        return $this->render('AppBundle:advertisement:list.html.twig', [
+            'pagination' => $pagination,
+            'editModeName' => AdvertisementType::EDIT_MODE,
+            'replaceImageModeName' => AdvertisementType::IMAGE_MODE
+        ]);
     }
 
     /**
@@ -81,10 +85,13 @@ class AdvertisementController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $entity->setImage(new File($this->getParameter('images_directory') . '/' . $entity->getImage()));
-
-        $form = $this->createForm(new AdvertisementType(), $entity, [
-            'action' => $this->generateUrl('advertisement_edit', ['id' => $entity->getId()]),
+        $oldFile = new File($this->getParameter('images_directory') . '/' . $entity->getImage());
+        $entity->setImage($oldFile);
+        $form = $this->createForm(new AdvertisementType($request->get('mode')), $entity, [
+            'action' => $this->generateUrl('advertisement_edit', [
+                'id' => $entity->getId(),
+                'mode' => $request->get('mode')
+            ]),
             'method' => 'POST',
         ])->add('submit', 'submit', [
             'attr' => ['class' => 'btn btn-default pull-left']
@@ -95,7 +102,7 @@ class AdvertisementController extends Controller
 
             if ($form->isValid()) {
                 $advertisementService = $this->get('app.advertisement');
-                $advertisementService->saveAdvertisement($entity);
+                $advertisementService->saveAdvertisement($entity, $oldFile);
                 $this->addFlash('success', 'Successfully changed the advertisement.');
                 return $this->redirect($this->generateUrl('advertisement_list'));
             }
