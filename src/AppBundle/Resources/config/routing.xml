@@ -48,4 +48,8 @@
         <default key="_controller">AppBundle:Advertisement:invocationCode</default>
     </route>
 
+    <route id="advertisement_statistics" path="/advertisement-statistics/{id}">
+        <default key="_controller">AppBundle:Advertisement:statistics</default>
+    </route>
+
 </routes>

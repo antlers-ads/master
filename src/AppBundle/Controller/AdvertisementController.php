@@ -175,4 +175,22 @@ class AdvertisementController extends Controller
             'workerAddress' => $this->getParameter('worker_address')
         ]);
     }
+
+    /**
+     * Displays statistics for advertisement.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function statisticsAction(Request $request, $id)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Advertisement');
+        $entity = $repository->getById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('AppBundle:advertisement:statistics.html.twig', ['entity' => $entity]);
+    }
 }
